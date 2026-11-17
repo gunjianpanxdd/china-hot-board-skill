@@ -14,6 +14,12 @@ heat-scored `HotItem` contract. This is the engineering playbook — endpoint kn
 schema-resilient parsers, article-body extraction, heat qualification, and graceful
 degradation — distilled from a production multi-platform collector.
 
+**Hot boards only.** This skill solves one problem — capture what is trending right now:
+board endpoints, parsing, normalization, heat qualification. Keyword-based news search is a
+separate concern, handled by the companion `china-news-search-skill`. Signed-in sources and
+captcha walls are out of scope by design; when one appears, this skill degrades to `partial`
+and flags it for compliance review rather than bypassing it.
+
 **It is knowledge, not a running service.** No scheduler, no cookies, no database. The unit
 of reuse is *how to add and maintain a data source*, so any agent can extend a collector
 without re-discovering every site's quirks.
@@ -90,14 +96,6 @@ item_id · platform · title · url · rank · heat(HeatMetrics)
 
 Three invariants: **strict success contract**, **evidence-backed heat**, **full-text
 validation**. See [references/data-contract.md](references/data-contract.md).
-
-## Scope
-
-**In scope:** endpoint knowledge, parser skeletons, noise dictionaries, data contract, heat
-rules, degradation playbook, verification scripts.
-
-**Out of scope:** schedulers, Redis locks/switches, DB upsert, cookie pools — runtime
-concerns that stay in the host service.
 
 ## License
 
